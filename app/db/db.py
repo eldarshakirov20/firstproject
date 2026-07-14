@@ -20,7 +20,7 @@ DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NA
 # Создаем engine для подключения к БД
 engine = create_engine(
     DATABASE_URL,
-    echo=False,  # <- Изменено с True на False
+    echo=False,
     pool_size=5,
     max_overflow=10
 )
@@ -31,7 +31,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Базовый класс для моделей
 Base = declarative_base()
 
-# Функция для получения сессии БД
+# Функция для получения сессии БД (для FastAPI dependency)
 def get_db():
     db = SessionLocal()
     try:
